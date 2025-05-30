@@ -33,8 +33,10 @@ export class Commands {
       .alias("m")
       .argument("<module>", "Module name")
       .description("Create a new module")
-      .action((module) => {
-        Modules.create(module);
+      .option("--test", "Create a test module")
+      .option("--boilerplate", "Include boilerplate file")
+      .action((module, options) => {
+        Modules.create(module, options);
 
         process.exit(0);
       });

@@ -4,7 +4,10 @@ import path from "node:path";
 import chalk from "chalk";
 
 export class Modules {
-  static async create(name: string) {
+  static async create(
+    name: string,
+    options?: { test?: boolean; boilerplate?: any }
+  ) {
     if (!name) {
       console.error(chalk.red("Module name is required."));
       process.exit(1);
@@ -25,6 +28,10 @@ export class Modules {
     ];
 
     const modulePath = path.join(process.cwd(), "src", name);
+
+    if (options?.test) {
+      folders.push("__tests__");
+    }
 
     console.log(chalk.cyan(`🛠 Creation your module in progress...`));
 
