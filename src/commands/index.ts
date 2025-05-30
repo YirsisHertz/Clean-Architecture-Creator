@@ -11,6 +11,12 @@ export class Commands {
 
     this.createModule();
     this.createRepository();
+    this.createEntity();
+    this.createAdapter();
+    this.createModel();
+    this.createUseCase();
+    this.createEnum();
+    this.createInterface();
 
     program.parse();
   }
@@ -98,7 +104,7 @@ export class Commands {
   private createEntity() {}
   private createAdapter() {}
   private createModel() {}
+  private createUseCase() {}
   private createEnum() {}
   private createInterface() {}
-  private createUseCase() {}
 }
