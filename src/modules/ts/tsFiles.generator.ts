@@ -59,6 +59,16 @@ export class TsFilesGenerator {
       `${options?.flat ? route[0] : route[1]}.repository.ts`
     );
 
+    if (fs.existsSync(repositoryPath)) {
+      console.log(
+        chalk.red(
+          `❌ Repository file already exists at: ${repositoryPath}. Please choose a different name or remove the existing file.`
+        )
+      );
+
+      process.exit(1);
+    }
+
     const repositoryContent = `export abstract class ${this.capitalizeFirstLetter(
       `${options?.flat ? route[0] : route[1]}`
     )}Repository {\n  abstract firstRule(options: any /*define your params or options*/): void;\n}`;
