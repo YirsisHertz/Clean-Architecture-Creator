@@ -1,0 +1,23 @@
+{
+  "name": "clean-architecture-creator",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "bun build . --compile --outfile=dist/cac",
+    "test": "bun test",
+    "start": "bun run dist/index.js",
+    "dev": "bun run --watch index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "dotenv": "^16.5.0"
+  }
+}
