@@ -79,4 +79,6 @@ export class TsFilesGenerator {
       chalk.green(`✔ Repository file to be created: ${repositoryPath}`)
     );
   }
+
+  static createEntity(entitie: string, options?: FilesGeneratorOptions) {}
 }
