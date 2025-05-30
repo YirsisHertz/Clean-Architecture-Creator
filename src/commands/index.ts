@@ -94,4 +94,11 @@ export class Commands {
         process.exit(0);
       });
   }
+
+  private createEntity() {}
+  private createAdapter() {}
+  private createModel() {}
+  private createEnum() {}
+  private createInterface() {}
+  private createUseCase() {}
 }
