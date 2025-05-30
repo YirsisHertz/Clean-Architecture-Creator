@@ -33,8 +33,10 @@ export class Commands {
       .alias("m")
       .argument("<module>", "Module name")
       .description("Create a new module")
+      .option("--flat", "Create a flat module structure")
       .option("--test", "Create a test module")
       .option("--boilerplate", "Include boilerplate file")
+      .option("--dry", "Dry run mode, only show what would be created")
       .action((module, options) => {
         Modules.create(module, options);
 
