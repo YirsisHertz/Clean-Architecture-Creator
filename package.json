@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "bun build . --compile --outfile=dist/cac",
+    "build": "bun build . --compile --outfile=cac/bin/cac",
     "test": "bun test",
     "start": "bun run dist/index.js",
     "dev": "bun run --watch index.ts"
