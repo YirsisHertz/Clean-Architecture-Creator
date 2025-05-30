@@ -1,5 +1,6 @@
 import { program } from "commander";
 import { Modules } from "../modules";
+import { TsFilesGenerator } from "../modules/ts/tsFiles.generator";
 
 export class Commands {
   constructor() {
@@ -8,6 +9,7 @@ export class Commands {
     this.version();
 
     this.createModule();
+    this.createRepository();
 
     program.parse();
   }
@@ -35,10 +37,36 @@ export class Commands {
       .description("Create a new module")
       .option("--flat", "Create a flat module structure")
       .option("--test", "Create a test module")
-      .option("--boilerplate", "Include boilerplate file")
+      // .option("--boilerplate", "Include boilerplate file")
       .option("--dry", "Dry run mode, only show what would be created")
       .action((module, options) => {
         Modules.create(module, options);
+
+        process.exit(0);
+      });
+  }
+
+  private createRepository() {
+    program
+      .command("repository")
+      .alias("r")
+      .argument("<repository>", "Repository name")
+      .description(
+        "Create a new repository, using the format <module>/<repository>"
+      )
+      .option(
+        "--lang",
+        "Language of the repository | Compatibles [ts, js]",
+        "ts"
+      )
+      .option("--flat", "Create a flat repository structure")
+      .option("--dry", "Dry run mode, only show what would be created")
+      .action((repository, options) => {
+        const lang = options.lang;
+
+        if (lang === "ts") {
+          TsFilesGenerator.createRepository(repository, options);
+        }
 
         process.exit(0);
       });
