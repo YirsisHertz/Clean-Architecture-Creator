@@ -138,7 +138,7 @@ export class Commands {
         }
 
         if (lang === "ts") {
-          TsFilesGenerator.createRepository(entity, options);
+          TsFilesGenerator.createEntity(entity, options);
         }
 
         process.exit(0);
