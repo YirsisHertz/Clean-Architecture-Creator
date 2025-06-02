@@ -3,6 +3,8 @@ import { program } from "commander";
 import { Modules } from "../modules";
 import { TsFilesGenerator } from "../modules/ts/tsFiles.generator";
 
+import { compatibleLangs } from "../envs";
+
 export class Commands {
   constructor() {
     this.defineCLI();
@@ -71,8 +73,6 @@ export class Commands {
       .action((repository, options) => {
         const lang = options.lang;
 
-        const compatibleLangs = ["ts", "js"];
-
         if (!compatibleLangs.includes(lang)) {
           console.log(
             chalk.red(
@@ -101,7 +101,49 @@ export class Commands {
       });
   }
 
-  private createEntity() {}
+  private createEntity() {
+    program
+      .command("entity")
+      .alias("e")
+      .argument("<entity>", "Entity name")
+      .description("Create a new entity, using the format <module>/<entity>")
+      .option(
+        "--lang <lang>",
+        `Language of the entity | Compatibles [${compatibleLangs.join(", ")}]`,
+        "ts"
+      )
+      .option("--flat", "Create a flat entity structure")
+      .option("--dry", "Dry run mode, only show what would be created")
+      .action((entity, options) => {
+        const lang = options.lang;
+
+        if (!compatibleLangs.includes(lang)) {
+          console.log(
+            chalk.red(
+              `Language ${lang} is not supported. Compatible languages are: ${compatibleLangs.join(
+                ", "
+              )}`
+            )
+          );
+          process.exit(1);
+        }
+
+        if (lang === "js") {
+          console.log(
+            chalk.red(
+              "JavaScript does not support interfaces or static typing of code in the language, please use TypeScript."
+            )
+          );
+          process.exit(1);
+        }
+
+        if (lang === "ts") {
+          TsFilesGenerator.createRepository(entity, options);
+        }
+
+        process.exit(0);
+      });
+  }
   private createAdapter() {}
   private createModel() {}
   private createUseCase() {}
